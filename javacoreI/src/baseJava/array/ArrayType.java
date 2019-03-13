@@ -3,7 +3,7 @@ package baseJava.array;
 import java.util.Arrays;
 
 
-//数组
+//数组主类
 public class ArrayType {
 	
 	public static void main(String[] args) {
