@@ -2,6 +2,7 @@ package objectAndClass;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -10,7 +11,8 @@ public class ObjectTest {
 	
 	
 	public static void main(String[] args) {
-		testDate();
+		String time = String.format("%tF %<tT", new Date());
+		System.out.println(time);
 	}
 	
 	/**
