@@ -1,6 +1,8 @@
 package baseJava.array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 //数组主类
@@ -20,6 +22,11 @@ public class ArrayType {
 		System.out.println("9对应的下标是：" + Arrays.binarySearch(data, 9)); 
 		System.out.println("-1对应的下标是：" + Arrays.binarySearch(data, -1));
 		System.out.println("11对应的下标是：" + Arrays.binarySearch(data, 11));
+	}
+	
+	
+	public static void test(){
+		List<String> list = new ArrayList<String>();
 	}
 
 }
