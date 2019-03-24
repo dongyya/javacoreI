@@ -1,5 +1,6 @@
 package inherit.reflect;
 
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,39 +10,58 @@ import java.util.Scanner;
 public class ReflectTest {
 	
 	public static void main(String[] args) {
-		
-		//接收用户输入的类名
-		Scanner scan = new Scanner(System.in);
-		System.out.println("请输入类名：");
-		String className = scan.next();
-		//根据类名获取该类实例
+		ReflectEntity r = new ReflectEntity();
+		r.setProperty("test");
 		try{
-			Class c1 = Class.forName(className);
-			//获取该类的父类
-			Class c1super = c1.getSuperclass();
-			//获取该类的修饰符
-			String c1modifier = Modifier.toString(c1.getModifiers());
-			if(c1modifier.length() > 0){
-				System.out.print(c1modifier);
-			}
-			System.out.print(" class " + c1.getName());
-			//如果该类有除了Object之外的超类
-			if(c1super != null && c1super != Object.class){
-				//将超类展示
-				System.out.print(" extends " + c1super.getName());
-			}
-			System.out.print("\n{");
-			//构造方法列表
-			printConstrutors(c1);
-			//普通方法列表
-			printMethods(c1);
-			//属性列表
-			printFields(c1);
-			System.out.print("\n}");
-		}catch(ClassNotFoundException e){
-			e.printStackTrace();
+			Class reflectEntity = r.getClass();
+			Field field = reflectEntity.getDeclaredField("property");
+			field.setAccessible(true);
+			Object object = field.get(r);
+			System.out.print(object.toString());
+			field.set(r, "testnew");
+			Object objectnew = field.get(r);
+			System.out.print(objectnew.toString());
+		}catch(NoSuchFieldException e1){
+			e1.printStackTrace();
+		}catch(IllegalAccessException e2){
+			e2.printStackTrace();
 		}
 		System.exit(0);
+	}
+	
+	public static void checkClass(){
+		//接收用户输入的类名
+				Scanner scan = new Scanner(System.in);
+				System.out.println("请输入类名：");
+				String className = scan.next();
+				//根据类名获取该类实例
+				try{
+					Class c1 = Class.forName(className);
+					//获取该类的父类
+					Class c1super = c1.getSuperclass();
+					//获取该类的修饰符
+					String c1modifier = Modifier.toString(c1.getModifiers());
+					if(c1modifier.length() > 0){
+						System.out.print(c1modifier);
+					}
+					System.out.print(" class " + c1.getName());
+					//如果该类有除了Object之外的超类
+					if(c1super != null && c1super != Object.class){
+						//将超类展示
+						System.out.print(" extends " + c1super.getName());
+					}
+					System.out.print("\n{");
+					//构造方法列表
+					printConstrutors(c1);
+					//普通方法列表
+					printMethods(c1);
+					//属性列表
+					printFields(c1);
+					System.out.print("\n}");
+				}catch(ClassNotFoundException e){
+					e.printStackTrace();
+				}
+				System.exit(0);
 	}
 	
 	public static void printFields(Class c1){
