@@ -27,23 +27,19 @@ class TalkingClock{
 	}
 	
 	public void start(){
-		TimePrinter t = new TimePrinter();
+		
+		ActionListener t = new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Date now = new Date();
+				System.out.println("At this ton,the time is " + now);
+				if(TalkingClock.this.beep){
+					Toolkit.getDefaultToolkit().beep();
+				}
+			}
+		};
 		Timer timer = new Timer(interval,t);
 		timer.start();
 	}
 	
-	public class TimePrinter implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			Date now = new Date();
-			System.out.println("At this ton,the time is " + now);
-			if(beep){
-				Toolkit.getDefaultToolkit().beep();
-			}
-		}
-		
-	}
-
 }
